@@ -12,4 +12,13 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="init-2" author="michaelhum" failOnError="true">
+        <comment>Create accounts table</comment>
+        <createTable tableName="ACCOUNTS">
+            <column name="ID" type="INTEGER">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
