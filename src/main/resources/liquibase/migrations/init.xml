@@ -7,7 +7,12 @@
     <changeSet id="init-1" author="michaelhum" failOnError="true">
         <comment>Create users table</comment>
         <createTable tableName="USERS">
-            <column name="USERNAME" type="VARCHAR2(10)"/>
+            <column name="ID" type="INTEGER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR2(10)">
+                <constraints unique="true"/>
+            </column>
             <column name="PASSWORD" type="VARCHAR2(20)"/>
         </createTable>
     </changeSet>
