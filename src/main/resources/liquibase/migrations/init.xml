@@ -23,6 +23,15 @@
             <column name="ID" type="INTEGER">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="ACCOUNT_TYPE" type="VARCHAR2(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BALANCE" type="DECIMAL" defaultValue="0.00">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

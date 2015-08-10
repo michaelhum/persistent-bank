@@ -1,6 +1,8 @@
 package ca.carleton.bank.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a user of the application.
@@ -23,8 +25,18 @@ public class User {
     @Column(name = "PASSWORD", nullable = false, unique = true)
     private String password;
 
+    @OneToMany(mappedBy = "accountOwner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Account> accounts;
+
+    public void addAccount(final Account account) {
+        if (this.accounts == null) {
+            this.accounts = new ArrayList<>();
+        }
+        this.accounts.add(account);
+    }
+
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(final int id) {
@@ -32,7 +44,7 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(final String userName) {
@@ -40,15 +52,23 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(final String password) {
         this.password = password;
     }
 
+    public List<Account> getAccounts() {
+        return this.accounts;
+    }
+
+    public void setAccounts(final List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
     public String toString() {
-        return String.format("User: [%s:%s]", this.userName, this.password);
+        return String.format("User: [%s:%s]\nAccounts: %s", this.userName, this.password, this.accounts);
     }
 
 }

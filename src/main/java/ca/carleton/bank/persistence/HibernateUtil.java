@@ -6,8 +6,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import org.reflections.Reflections;
 
+import javax.persistence.Entity;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * Hibernate utilities for building and returning the session factory.
@@ -23,6 +26,13 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
         try {
             final Configuration configuration = new Configuration();
+
+            // Register entity types because this project isn't using spring (yet)?
+
+            final Reflections reflections = new Reflections("ca.carleton.bank.entity");
+            final Set<Class<?>> classes = reflections.getTypesAnnotatedWith(Entity.class);
+            classes.forEach(configuration::addAnnotatedClass);
+
             configuration.addPackage("ca.carleton.bank.entity")
                     .configure();
 
